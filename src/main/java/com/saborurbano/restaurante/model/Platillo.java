@@ -1,5 +1,9 @@
 package com.saborurbano.restaurante.model;
+
 import java.util.Set;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.*;
 import lombok.Data;
@@ -20,15 +24,16 @@ public class Platillo {
     @Column(nullable = false, length = 100, unique = true)
     private String nombre;
 
-
     @Column(nullable = false, length = 100)
     private Double precio;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_categoria")
+    @JsonBackReference("categoria-platillos")
     private Categoria categoria;
 
     @OneToMany(mappedBy = "platillo")
+    @JsonManagedReference("platillo")
     private Set<CalificacionPlatillo> calificaciones;
 
     public Platillo(String nombre, Double precio, Categoria categoria) {
@@ -36,10 +41,5 @@ public class Platillo {
         this.precio = precio;
         this.categoria = categoria;
     }
-    
-
-    
-
-
 
 }

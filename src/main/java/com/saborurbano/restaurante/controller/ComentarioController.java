@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.saborurbano.restaurante.model.Comentario;
 import com.saborurbano.restaurante.service.Comentario.ComentarioServiceImp;
-import com.saborurbano.restaurante.service.Usuario.UsuarioServiceImp;
+
 
 
 @RequestMapping("api/comentarios")
@@ -38,8 +38,8 @@ public class ComentarioController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteComentario(@PathVariable Integer id, Comentario comentario) {
-        comentarioServiceImp.deleteComentario(id, comentario);
+    public ResponseEntity<Void> deleteComentario(@PathVariable Integer id) {
+        comentarioServiceImp.deleteComentario(id);
         return ResponseEntity.noContent().build();
     }
 

@@ -1,5 +1,7 @@
 package com.saborurbano.restaurante.model;
+
 import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
@@ -25,11 +27,13 @@ public class CalificacionPlatillo {
     // Relación ManyToOne con Usuario (FK: id_usuario)
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_usuario")
+    @JsonBackReference("usuario-calificaciones")
     private Usuarios usuario;
 
     // Relación ManyToOne con Platillo (FK: id_platillo)
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_platillo")
+    @JsonBackReference("platillo")
     private Platillo platillo;
 
     public CalificacionPlatillo(Integer puntuacion, String comentarioCorto, Usuarios usuarios, Platillo platillo) {
@@ -39,5 +43,4 @@ public class CalificacionPlatillo {
         this.platillo = platillo;
     }
 
-    
 }

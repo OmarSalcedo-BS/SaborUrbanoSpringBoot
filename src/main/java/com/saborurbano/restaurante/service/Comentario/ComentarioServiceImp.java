@@ -28,24 +28,15 @@ public class ComentarioServiceImp implements ComentarioServiceInt {
     }
 
     @Override
-    public void deleteComentario(Integer id, Comentario comentario) {
-        comentarioRepository.findById(comentario.getIdComentario()).ifPresentOrElse(c -> {
+    public void deleteComentario(Integer id) {
+        comentarioRepository.findById(id).ifPresentOrElse(c -> {
             comentarioRepository.deleteById(id);
         },
         () -> {
 
-            throw new IllegalArgumentException("El comentario " + comentario.getIdComentario() + " no existe");
+            throw new IllegalArgumentException("El comentario " + id + " no existe");
         });
     }
-
-
-
-    public ComentarioRepository ComentarioRepository() {
-        return comentarioRepository;
-    
-    
-    }
-
 
     @Override
     public Comentario registrarComentario(Comentario comentario, Integer idUsuario) {

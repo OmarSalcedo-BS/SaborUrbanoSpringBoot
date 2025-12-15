@@ -36,7 +36,6 @@ public class UsuarioServiceImp implements  UsuarioServiceInt {
         .orElseThrow(() -> new RuntimeException("Error de Negocio: El usuario con ID " + id + " no existe."));
     }
 
-    @SuppressWarnings("null")
     @Override
     public void deleteUsuarios(Integer id, Usuarios usuarios) {
 

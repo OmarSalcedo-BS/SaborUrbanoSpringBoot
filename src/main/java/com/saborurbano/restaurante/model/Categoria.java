@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "Categoria")
 @Data
@@ -22,6 +24,7 @@ public class Categoria {
 
     // Relación OneToMany: Una Categoria tiene muchos Platillos
     @OneToMany(mappedBy = "categoria")
+    @JsonManagedReference("categoria-platillos")
     private Set<Platillo> platillos;
 
     public Categoria(String nombreCategoria, Set<Platillo> platillos) {
@@ -29,5 +32,4 @@ public class Categoria {
         this.platillos = platillos;
     }
 
-    
 }

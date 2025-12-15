@@ -9,6 +9,6 @@ public interface ComentarioServiceInt {
 
     public List<Comentario> getAllComentarios();
 
-    public void deleteComentario(Integer id, Comentario comentario);
+    public void deleteComentario(Integer id);
     
 }
