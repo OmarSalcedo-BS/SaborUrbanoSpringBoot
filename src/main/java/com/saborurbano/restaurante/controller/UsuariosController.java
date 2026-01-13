@@ -32,7 +32,7 @@ public class UsuariosController {
 
     }
 
-    @Operation(summary = "Obtener todos los usuarios", description = "Devuelve una lista de usuarios")
+    @Operation(summary = "Obtener todos los usuarios", description = "Devuelve una lista de todos los usuarios")
     @ApiResponses(value ={
         @ApiResponse(responseCode = "200", description = "Devuelve una lista de usuarios"),
         @ApiResponse(responseCode = "400", description = "Error del cliente"),
@@ -48,7 +48,7 @@ public class UsuariosController {
     @Operation(summary = "Crear un usuario", description = "Crea un nuevo usuario")
     @ApiResponses(value ={
         @ApiResponse(responseCode = "201", description = "Usuario creado correctamente"),
-        @ApiResponse(responseCode = "400", description = "Error del cliente no se puedo crear el usuario"),
+        @ApiResponse(responseCode = "400", description = "Error del cliente"),
         @ApiResponse(responseCode = "500", description = "Error interno del servidor")
     })
     @PostMapping
@@ -57,10 +57,10 @@ public class UsuariosController {
         return new ResponseEntity<>(nuevoUsuario, HttpStatus.CREATED);
     }
 
-    @Operation(summary = "Eliminar un usuario", description = "Elimina un usuario")
+    @Operation(summary = "Eliminar un usuario", description = "Elimina un usuario con el id especificado")
     @ApiResponses(value ={
         @ApiResponse(responseCode = "204", description = "Usuario eliminado correctamente"),
-        @ApiResponse(responseCode = "400", description = "Error del cliente no se puede eliminar el usuario"),
+        @ApiResponse(responseCode = "400", description = "Error del cliente"),
         @ApiResponse(responseCode = "500", description = "Error interno del servidor")
     })
     @DeleteMapping("/{id}")
