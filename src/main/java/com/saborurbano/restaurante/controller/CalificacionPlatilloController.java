@@ -4,14 +4,21 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import io.swagger.v3.oas.annotations.tags.Tag;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.Operation;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.saborurbano.restaurante.dtos.CalificacionPlatilloDto;
 import com.saborurbano.restaurante.service.CalificacionPlatillo.CalificacionPlatilloServiceImp;
+
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RequestMapping("api/calificaciones")
 @RestController
@@ -42,9 +49,21 @@ public class CalificacionPlatilloController {
             @ApiResponse(responseCode = "500", description = "Error interno del servidor")
     })
     @GetMapping("/{id}")
-    public ResponseEntity<CalificacionPlatilloDto> getCalificacionById(@PathVariable Long id) {
+    public ResponseEntity<CalificacionPlatilloDto> getCalificacionById(@PathVariable Integer id) {
         return ResponseEntity.ok(calificacionServiceImp.getCalificacionById(id));
     }
+
+    @Operation(summary= "Obtener todas las calificaciones con el id de un usuario", description= "Nos devuelve la lista de los comentarios hechos por un usuario")
+     @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Devuelve una lista de calificaciones"),
+            @ApiResponse(responseCode = "400", description = "Error del cliente"),
+            @ApiResponse(responseCode = "500", description = "Error interno del servidor")
+    })
+    @GetMapping("/usuario/{idUsuario}")
+    public ResponseEntity<List<CalificacionPlatilloDto>> getCalificacionByUsuarioId(@PathVariable Integer idUsuario) {
+        return ResponseEntity.ok(calificacionServiceImp.getCalificacionByUsuarioId(idUsuario));
+    }
+    
 
     @Operation(summary = "Crear una calificacion", description = "Crea una nueva calificacion con un idUsuario y un idPlatillo")
     @ApiResponses(value = {
@@ -69,7 +88,7 @@ public class CalificacionPlatilloController {
             @ApiResponse(responseCode = "500", description = "Error interno del servidor")
     })
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteCalificacion(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteCalificacion(@PathVariable Integer id) {
         calificacionServiceImp.deleteCalificacion(id);
         return ResponseEntity.noContent().build();
     }

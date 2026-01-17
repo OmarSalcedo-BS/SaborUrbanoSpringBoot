@@ -96,7 +96,7 @@ public class CalificacionPlatilloServiceImp implements CalificacionPlatilloServi
     }
 
     @Override
-    public CalificacionPlatilloDto getCalificacionById(Long id) {
+    public CalificacionPlatilloDto getCalificacionById(Integer id) {
         if (id == null || id <= 0) {
             throw new IllegalArgumentException("El id de calificacion es inválido.");
         }
@@ -107,8 +107,26 @@ public class CalificacionPlatilloServiceImp implements CalificacionPlatilloServi
         return calificacionMapper.toDTO(calificacion);
     }
 
+    //Se crea obtener calificaciones con el id de los usuarios retornando todos los comentarios hechos por un usuario especifico
     @Override
-    public void deleteCalificacion(Long id) {
+    public List<CalificacionPlatilloDto> getCalificacionByUsuarioId(Integer idUsuario) {
+        if (idUsuario == null || idUsuario <= 0) {
+            throw new IllegalArgumentException("El id de usuario es inválido.");
+        }
+
+        List<CalificacionPlatillo> calificaciones = calificacionRepository.findByUsuarioId(idUsuario);
+        
+        if (calificaciones.isEmpty()) {
+            throw new RuntimeException("No existen calificaciones por parte del usuario con id " + idUsuario);
+        }
+
+        return calificaciones.stream()
+                .map(calificacionMapper::toDTO)
+                .toList();
+    }
+
+    @Override
+    public void deleteCalificacion(Integer id) {
         if (id == null || id <= 0) {
             throw new IllegalArgumentException("El id de calificacion es inválido.");
         }
