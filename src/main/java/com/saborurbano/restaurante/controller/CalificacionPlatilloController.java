@@ -49,7 +49,7 @@ public class CalificacionPlatilloController {
             @ApiResponse(responseCode = "500", description = "Error interno del servidor")
     })
     @GetMapping("/{id}")
-    public ResponseEntity<CalificacionPlatilloDto> getCalificacionById(@PathVariable Long id) {
+    public ResponseEntity<CalificacionPlatilloDto> getCalificacionById(@PathVariable Integer id) {
         return ResponseEntity.ok(calificacionServiceImp.getCalificacionById(id));
     }
 
@@ -59,9 +59,9 @@ public class CalificacionPlatilloController {
             @ApiResponse(responseCode = "400", description = "Error del cliente"),
             @ApiResponse(responseCode = "500", description = "Error interno del servidor")
     })
-    @GetMapping("/{idUsuario}")
-    public ResponseEntity<CalificacionPlatilloDto> getCalificacionByUsuarioId(@PathVariable Long id) {
-        return ResponseEntity.ok(calificacionServiceImp.getCalificacionByUsuarioId(id));
+    @GetMapping("/usuario/{idUsuario}")
+    public ResponseEntity<List<CalificacionPlatilloDto>> getCalificacionByUsuarioId(@PathVariable Integer idUsuario) {
+        return ResponseEntity.ok(calificacionServiceImp.getCalificacionByUsuarioId(idUsuario));
     }
     
 
@@ -88,7 +88,7 @@ public class CalificacionPlatilloController {
             @ApiResponse(responseCode = "500", description = "Error interno del servidor")
     })
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteCalificacion(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteCalificacion(@PathVariable Integer id) {
         calificacionServiceImp.deleteCalificacion(id);
         return ResponseEntity.noContent().build();
     }

@@ -11,9 +11,9 @@ public interface CalificacionPlatilloServiceInt {
 
     List<CalificacionPlatilloDto> getAllCalificaciones();
 
-    CalificacionPlatilloDto getCalificacionById(Long id);
+    CalificacionPlatilloDto getCalificacionById(Integer id);
 
-    CalificacionPlatilloDto getCalificacionByUsuarioId(Long idUsuario);
+    List<CalificacionPlatilloDto> getCalificacionByUsuarioId(Integer idUsuario);
 
-    void deleteCalificacion(Long id);
+    void deleteCalificacion(Integer id);
 }
